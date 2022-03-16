@@ -49,6 +49,3 @@ settings.gradle
 ############
 .idea
 .idea/
-
-src/
-build.gradle
