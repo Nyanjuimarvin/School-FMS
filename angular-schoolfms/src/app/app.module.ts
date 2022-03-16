@@ -8,6 +8,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { BursarAccountantFormComponent } from './bursar-accountant-form/bursar-accountant-form.component';
 import { BursarAccountantViewpageComponent } from './bursar-accountant-viewpage/bursar-accountant-viewpage.component';
+import { FooterComponent } from './footer/footer.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { BursarAccountantViewpageComponent } from './bursar-accountant-viewpage/
     NavBarComponent,
     RegistrationFormComponent,
     BursarAccountantFormComponent,
-    BursarAccountantViewpageComponent
+    BursarAccountantViewpageComponent,
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
