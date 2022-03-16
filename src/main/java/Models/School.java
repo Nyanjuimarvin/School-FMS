@@ -1,9 +1,10 @@
 package Models;
 
 public class School {
-    String name;
-    String region;
-    String email;
+    private String  name;
+    private String region;
+    private String email;
+    private int id;
 
     private static School instance  = null;
 
@@ -23,6 +24,10 @@ public class School {
         this.email = email;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -33,6 +38,10 @@ public class School {
 
     public String getRegion() {
         return region;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public static School getInstance(){
