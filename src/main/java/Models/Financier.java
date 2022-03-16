@@ -8,15 +8,17 @@ public abstract class Financier {
     private  String email;
     private int nationalId;
     private String contact;
+    private String password;
     private int id;
 
     public String type;
 
-    public Financier(String name, String email, int nationalId, String contact) {
+    public Financier(String name, String email, int nationalId, String contact, String password) {
         this.name = name;
         this.email = email;
         this.nationalId = nationalId;
         this.contact = contact;
+        this.password = password;
     }
 
     public void setName(String name) {
@@ -33,6 +35,10 @@ public abstract class Financier {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setId(int id) {
@@ -55,6 +61,10 @@ public abstract class Financier {
         return contact;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public int getId() {
         return id;
     }
@@ -65,11 +75,16 @@ public abstract class Financier {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Financier financier = (Financier) o;
-        return nationalId == financier.nationalId && Objects.equals(name, financier.name) && Objects.equals(email, financier.email) && Objects.equals(contact, financier.contact);
+        return nationalId == financier.nationalId
+                && Objects.equals(name, financier.name)
+                && Objects.equals(email, financier.email)
+                && Objects.equals(contact, financier.contact)
+                && Objects.equals(password, financier.password)
+                && Objects.equals(type, financier.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, email, nationalId, contact);
+        return Objects.hash(name, email, nationalId, contact, password, type);
     }
 }
