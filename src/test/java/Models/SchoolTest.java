@@ -20,6 +20,7 @@ class SchoolTest {
         School school = setUpSchool();
         assertEquals("Combine High",school.getName());
         assertEquals("Division 17",school.getRegion());
+        assertEquals("combine.high@blackMesa.com",school.getEmail());
     }
 
 
@@ -27,6 +28,7 @@ class SchoolTest {
         School school = School.getInstance();
         school.setName("Combine High");
         school.setRegion("Division 17");
+        school.setEmail("combine.high@blackMesa.com");
         return school;
     }
 

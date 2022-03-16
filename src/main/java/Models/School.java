@@ -3,6 +3,7 @@ package Models;
 public class School {
     String name;
     String region;
+    String email;
 
     private static School instance  = null;
 
@@ -16,6 +17,14 @@ public class School {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getName() {
