@@ -28,30 +28,46 @@ public class App {
 
         /* Get methods */
 
-        //Get School * passed *
+        //Get School
         get("/school/:id","application/json",(req,res)->{
             int id  = Integer.parseInt(req.params("id"));
+            if(schoolImplementation.getById(id) == null) {
+                return gson.toJson(String.format("No School with the Id %d exists", id));
+            }
             return gson.toJson(schoolImplementation.getById(id));
         });
 
         //Get bursar * passed *
         get("/bursar/:id","application/json",(req,res)->{
             int id  = Integer.parseInt(req.params("id"));
+            if (bursarImplementation.getBursar(id) == null) {
+                return gson.toJson(String.format("No bursar at the id %d exists", id));
+            }
             return gson.toJson(bursarImplementation.getBursar(id));
         });
 
         //Get student * passed *
         get("/student/:id","application/json",(req,res)->{
             int id  = Integer.parseInt(req.params("id"));
+            if (bursarImplementation.getStudent(id) == null) {
+                return gson.toJson(String.format("No Student at the id %d exists", id));
+            }
             return gson.toJson(bursarImplementation.getStudent(id));
         });
 
-        //Get All Students * passed *
-        get("/students/all","application/json",(req,res)->  gson.toJson(studentImplementation.getAll()));
-
-        //Delete student * passed *
+        //Get All Students
+        get("/students/all","application/json",(req,res)->{
+            if(studentImplementation.getAll().size() == 0) {
+                return gson.toJson("No students yet.Add some to get started");
+            }
+            return gson.toJson(studentImplementation.getAll());
+        });
+        //Delete student
         delete("/student/:id/delete","application/json",(req,res)->{
             int id  = Integer.parseInt(req.params("id"));
+            if (bursarImplementation.getStudent(id) == null) {
+                return gson.toJson(String.format("No student with the id %d exists", id));
+            }
             studentImplementation.delete(id);
             return gson.toJson(String.format("Student at id %d has been deleted",id));
         });
@@ -68,6 +84,9 @@ public class App {
         //Update pocketMoney * passed *
         patch("/student/:id/:pocketMoney/pocketMoney/update","application/json",(req,res)->{
             int id = Integer.parseInt(req.params("id"));
+            if (bursarImplementation.getStudent(id) == null) {
+                return gson.toJson(String.format("No student at this given id: %d", id));
+            }
             double pocketMoney = Double.parseDouble(req.params("pocketMoney"));
             BigDecimal money = new BigDecimal(pocketMoney);
             bursarImplementation.updateStudentPocketMoney(id,money);
@@ -77,6 +96,9 @@ public class App {
         //Update feeBalance * passed *
         patch("/student/:id/:balance/balance/update","application/json",(req,res)->{
             int id = Integer.parseInt(req.params("id"));
+            if (bursarImplementation.getStudent(id) == null) {
+                return gson.toJson(String.format("No student at this given id: %d", id));
+            }
             double money = Double.parseDouble(req.params("balance"));
             BigDecimal newBalance = new BigDecimal(money);
             bursarImplementation.updateStudentFeeBalance(id,newBalance);
@@ -86,6 +108,9 @@ public class App {
         //Update bursar details * passed *
         patch("bursar/:id/update","application/json",(req,res)->{
             int id = Integer.parseInt(req.params("id"));
+            if (bursarImplementation.getBursar(id) == null) {
+                return gson.toJson(String.format("No bursar at the id %d exists", id));
+            }
             Bursar bursar = gson.fromJson(req.body(),Bursar.class);
             bursarImplementation.update(id,bursar.getName(),bursar.getEmail(),bursar.getNationalId(),bursar.getContact(), bursar.getPassword());
             return gson.toJson(String.format("%s's details have been updated", bursarImplementation.getBursar(id).getName()));
@@ -94,6 +119,9 @@ public class App {
         //Update student details * passed *
         patch("student/:id/update","application/json",(req,res)->{
             int id = Integer.parseInt(req.params("id"));
+            if (bursarImplementation.getStudent(id) == null) {
+                return gson.toJson(String.format("No student at this given id: %d", id));
+            }
             Student student = gson.fromJson(req.body(),Student.class);
             System.out.println(student.getName());
             studentImplementation.update(id, student.getName(),student.getClassStream(), student.getAdmissionNumber(),student.getPocketMoney(),student.getFeeBalance());
