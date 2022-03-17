@@ -8,5 +8,5 @@ public interface InventoryDao {
     void add (Inventory inventory);
    List<Inventory> getall();
 
-    List<Inventory> getAll();
+//    List<Inventory> getAll();
 }
