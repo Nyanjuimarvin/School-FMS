@@ -35,7 +35,22 @@ public class BursarImplementation implements BursarDao {
     }
 
     @Override
+    public void getStudent(int id) {
+
+    }
+
+    @Override
+    public void getBursar(int id) {
+
+    }
+
+    @Override
     public void deleteStudent(int id) {
+
+    }
+
+    @Override
+    public void deleteAll() {
 
     }
 }

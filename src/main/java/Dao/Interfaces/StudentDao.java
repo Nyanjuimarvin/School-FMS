@@ -8,6 +8,7 @@ public interface StudentDao {
 
     void add(Student student);
     List <Student> getAll();
-    void update(int id, String name, String classStream, int admissionNumber, double pocketMoney, double feeBalance);
+    void update(int id, String name, String stream, int admission, double money, double balance);
     void delete(int id);
+    void deleteAll();
 }
