@@ -6,6 +6,7 @@ import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class StudentImplementation implements StudentDao {
@@ -40,7 +41,7 @@ public class StudentImplementation implements StudentDao {
     }
 
     @Override
-    public void update(int id, String name, String stream, int admission, double money, double balance) {
+    public void update(int id, String name, String stream, int admission, BigDecimal money, BigDecimal balance) {
         String sql = "UPDATE students SET (name,classstream,admissionnumber,pocketmoney,feebalance) = (:name,:stream,:admission,:money,:balance) WHERE id = :id";
         try(Connection conn = sql2o.open()){
             conn.createQuery(sql)
@@ -60,6 +61,7 @@ public class StudentImplementation implements StudentDao {
     public void delete(int id) {
         try(Connection conn = sql2o.open()){
             conn.createQuery("DELETE FROM students WHERE id = :id")
+                    .addParameter("id",id)
                     .executeUpdate();
         }catch(Sql2oException ex){
             System.out.println(ex.getMessage());

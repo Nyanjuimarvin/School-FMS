@@ -88,7 +88,7 @@ public class BursarImplementation implements BursarDao {
     @Override
     public Bursar getBursar(int id) {
         try(Connection conn = sql2o.open()){
-            return conn.createQuery("SELECT * FROM financiers WHERE id = :id")
+            return conn.createQuery("SELECT * FROM financiers WHERE id = :id AND type = 'bursar'")
                     .addParameter("id",id)
                     .executeAndFetchFirst(Bursar.class);
         }
