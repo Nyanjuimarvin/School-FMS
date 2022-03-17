@@ -28,11 +28,11 @@ class BursarImplementationTest {
         conn = sql2o.open();
     }
 
-    @AfterEach
-    public void tearDown() {
-        bursarImplementation.deleteAll();
-        studentImplementation.deleteAll();
-    }
+//    @AfterEach
+//    public void tearDown() {
+//        bursarImplementation.deleteAll();
+//        studentImplementation.deleteAll();
+//    }
 
     @AfterAll
     public static void shutDown(){

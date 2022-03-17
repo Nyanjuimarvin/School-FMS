@@ -51,14 +51,34 @@ public class App {
 
         /* Post methods */
 
-        //New School
+        //New School * passed *
+        post("/school/new","application/json",(req,res)->{
+            School school = gson.fromJson(req.body(),School.class);
+            schoolImplementation.add(school);
+            res.status(201);
+            return gson.toJson(school);
+        });
 
-        //New Bursar
+        //New Bursar * passed *
+        post("/bursar/new","application/json",(req,res)->{
+            Bursar bursar = gson.fromJson(req.body(),Bursar.class);
+            bursarImplementation.add(bursar);
+            System.out.println(bursar.type);
+            res.status(201);
+            return gson.toJson(bursar);
+        });
 
-        //New Student
+        //New Student *Passed*
+        post("students/new","application/json",(req,res)->{
+            Student student = gson.fromJson(req.body(),Student.class);
+            studentImplementation.add(student);
+            res.status(201);
+            return gson.toJson(student);
+        });
 
-        //Bursar Login
-
-
+        //Filter
+        after((req,res)->{
+            res.type("application/json");
+        });
     }
 }
