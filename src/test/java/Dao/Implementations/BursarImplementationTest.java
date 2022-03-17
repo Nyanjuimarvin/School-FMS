@@ -6,6 +6,8 @@ import org.junit.jupiter.api.*;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BursarImplementationTest {
@@ -41,23 +43,62 @@ class BursarImplementationTest {
 
     @Test
     public void add_setsId() {
-
+        bursar = setUpBursar();
+        int initialId = bursar.getId();
+        bursarImplementation.add(bursar);
+        assertNotEquals(initialId,bursar.getId());
     }
 
     @Test
-    void update() {
+    public void update_UpdatesProperties() {
+        bursar = setUpBursar();
+        String initialName = bursar.getName();
+        String initialEmail = bursar.getEmail();
+        int initialId = bursar.getNationalId();
+        bursarImplementation.add(bursar);
+        bursarImplementation.update(bursar.getId(),"Chewbaca", "wookie@resistance.com",4646,"123-223-122332","gdssdd67wds");
+
+        assertNotEquals(initialName,bursarImplementation.getBursar(bursar.getId()).getName());
+        assertNotEquals(initialEmail, bursarImplementation.getBursar(bursar.getId()).getEmail());
+        assertNotEquals(initialId,bursarImplementation.getBursar(bursar.getId()).getNationalId());
     }
 
     @Test
-    void updateStudentFeeBalance() {
+    public void updateStudentFeeBalance_UpdatesFeeBalance() {
+        student = setUpStudent();
+        BigDecimal initialMoney = student.getFeeBalance();
+        studentImplementation.add(student);
+        bursar = setUpBursar();
+        BigDecimal newMoney = new BigDecimal("3434");
+        bursarImplementation.updateStudentFeeBalance(student.getId(),newMoney);
+        assertNotEquals(initialMoney, bursarImplementation.getStudent(student.getId()).getFeeBalance());
     }
 
     @Test
-    void updateStudentPocketMoney() {
+    public void updateStudentPocketMoney_UpdatesPocketMoney() {
+        student = setUpStudent();
+        BigDecimal initialMoney = student.getPocketMoney();
+        studentImplementation.add(student);
+        bursar = setUpBursar();
+        BigDecimal newMoney = new BigDecimal("3434");
+        bursarImplementation.updateStudentPocketMoney(student.getId(),newMoney);
+        assertNotEquals(initialMoney, bursarImplementation.getStudent(student.getId()).getPocketMoney());
     }
 
     @Test
-    void deleteStudent() {
+    public void getStudent_ReturnsStudent(){
+        student = setUpStudent();
+        studentImplementation.add(student);
+
+        assertEquals(student, bursarImplementation.getStudent(student.getId()));
+    }
+
+    @Test
+    public void deleteStudent_DeletesStudent() {
+        student = setUpStudent();
+        studentImplementation.add(student);
+        bursarImplementation.deleteStudent(student.getId());
+        assertFalse(studentImplementation.getAll().contains(student));
     }
 
     public Bursar setUpBursar(){
