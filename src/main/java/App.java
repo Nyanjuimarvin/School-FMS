@@ -5,7 +5,6 @@ import static spark.Spark.*;
 import com.google.gson.*;
 import org.sql2o.Sql2o;
 
-import java.lang.reflect.Type;
 import java.math.BigDecimal;
 
 public class App {
@@ -37,7 +36,7 @@ public class App {
             return gson.toJson(schoolImplementation.getById(id));
         });
 
-        //Get bursar * passed *
+        //Get bursar
         get("/bursar/:id","application/json",(req,res)->{
             int id  = Integer.parseInt(req.params("id"));
             if (bursarImplementation.getBursar(id) == null) {
@@ -46,7 +45,7 @@ public class App {
             return gson.toJson(bursarImplementation.getBursar(id));
         });
 
-        //Get student * passed *
+        //Get student
         get("/student/:id","application/json",(req,res)->{
             int id  = Integer.parseInt(req.params("id"));
             if (bursarImplementation.getStudent(id) == null) {
@@ -62,6 +61,9 @@ public class App {
             }
             return gson.toJson(studentImplementation.getAll());
         });
+
+        /* Delete methods */
+
         //Delete student
         delete("/student/:id/delete","application/json",(req,res)->{
             int id  = Integer.parseInt(req.params("id"));
@@ -72,7 +74,7 @@ public class App {
             return gson.toJson(String.format("Student at id %d has been deleted",id));
         });
 
-        //Delete students * passed *
+        //Delete students
         delete("/students/all/delete","application/json",(req,res)->{
             studentImplementation.deleteAll();
             return gson.toJson("All Students have been deleted");
@@ -81,7 +83,7 @@ public class App {
 
         /* Update Methods */
 
-        //Update pocketMoney * passed *
+        //Update pocketMoney
         patch("/student/:id/:pocketMoney/pocketMoney/update","application/json",(req,res)->{
             int id = Integer.parseInt(req.params("id"));
             if (bursarImplementation.getStudent(id) == null) {
@@ -93,7 +95,7 @@ public class App {
             return gson.toJson(String.format("%s's pocket money has been updated",bursarImplementation.getStudent(id).getName()));
         });
 
-        //Update feeBalance * passed *
+        //Update feeBalance
         patch("/student/:id/:balance/balance/update","application/json",(req,res)->{
             int id = Integer.parseInt(req.params("id"));
             if (bursarImplementation.getStudent(id) == null) {
@@ -105,7 +107,7 @@ public class App {
             return gson.toJson(String.format("%s's fee balance has been updated",bursarImplementation.getStudent(id).getName()));
         });
 
-        //Update bursar details * passed *
+        //Update bursar details
         patch("bursar/:id/update","application/json",(req,res)->{
             int id = Integer.parseInt(req.params("id"));
             if (bursarImplementation.getBursar(id) == null) {
@@ -116,7 +118,7 @@ public class App {
             return gson.toJson(String.format("%s's details have been updated", bursarImplementation.getBursar(id).getName()));
         });
 
-        //Update student details * passed *
+        //Update student details
         patch("student/:id/update","application/json",(req,res)->{
             int id = Integer.parseInt(req.params("id"));
             if (bursarImplementation.getStudent(id) == null) {
@@ -131,7 +133,7 @@ public class App {
 
         /* Post methods */
 
-        //New School * passed *
+        //New School
         post("/school/new","application/json",(req,res)->{
             School school = gson.fromJson(req.body(),School.class);
             schoolImplementation.add(school);
@@ -139,7 +141,7 @@ public class App {
             return gson.toJson(school);
         });
 
-        //New Bursar * passed *
+        //New Bursar
         post("/bursar/new","application/json",(req,res)->{
             Bursar bursar = gson.fromJson(req.body(),Bursar.class);
             bursarImplementation.add(bursar);
@@ -148,7 +150,7 @@ public class App {
             return gson.toJson(bursar);
         });
 
-        //New Student *Passed*
+        //New Student
         post("students/new","application/json",(req,res)->{
             Student student = gson.fromJson(req.body(),Student.class);
             studentImplementation.add(student);
