@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+bottom {
+  position: fixed;
+  width: 50%;
+  bottom: 10px;
+  border: 3px solid #8AC007;
+} 
+.translucent {
+  background-color: #fff;
+  background-color: rgba(255,255,255,0.5);
+}
+.center{
+  width: 50%;
+  margin: 0 auto;
+}
